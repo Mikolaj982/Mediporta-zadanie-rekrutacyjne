@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useEffect, useState } from 'react';
+import { DataContextType, DataProvider } from './context/DataContext';
+import TagsList from './components/TagsList';
+import { Alert, CircularProgress } from '@mui/material';
+import { useContextData, TagData } from './context/DataContext';
+
+interface Error {
+  boolean: boolean,
+  message: string,
+}
 
 function App() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error>({ boolean: false, message: '' });
+  const context = useContextData();
+  const { tagsData, setTagsData, sortBy, setSortBy, sortOrder, setSortOrder } = context;
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchTagsData = async () => {
+      try {
+        const response = await fetch("https://api.stackexchange.com/2.3/tags?pagesize=100&fromdate=1134345600&todate=1711497600&order=desc&min=0&max=9999999&sort=popular&site=stackoverflow");
+
+        if (!response.ok) {
+          throw new Error('Problem')
+        }
+
+        const jsonData = await response.json();
+        const items: TagData[] = await jsonData.items;
+        setTagsData(items);
+        setLoading(false);
+      } catch (error) {
+        setError({ boolean: true, message: 'Error fetching data' });
+        console.error('Error fetching data', error);
+        setLoading(false);
+      }
+    }
+    fetchTagsData();
+  }, []);
+  console.log('tags:', tagsData)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: '100%' }}>
+      {loading ? <CircularProgress />
+        :
+        <TagsList
+          tagsData={tagsData}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+        />}
+      {error.boolean && <Alert severity="error">{error.message}</Alert>}
     </div>
-  );
+  )
 }
 
 export default App;
