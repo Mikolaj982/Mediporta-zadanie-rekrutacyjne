@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { DataContextType, DataProvider } from './context/DataContext';
+import { useEffect, useState } from 'react';
 import TagsList from './components/TagsList';
 import { Alert, CircularProgress } from '@mui/material';
 import { useContextData, TagData } from './context/DataContext';
@@ -37,10 +36,15 @@ function App() {
     }
     fetchTagsData();
   }, []);
-  console.log('tags:', tagsData)
   return (
     <div style={{ width: '100%' }}>
-      {loading ? <CircularProgress />
+      {loading ? <CircularProgress
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(50%, 50%)'
+        }} />
         :
         <TagsList
           tagsData={tagsData}
@@ -49,8 +53,14 @@ function App() {
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
         />}
-      {error.boolean && <Alert severity="error">{error.message}</Alert>}
-    </div>
+      {error.boolean && <Alert
+        sx={{
+          position: 'absolute',
+          marginLeft: '20px',
+          marginTop: '20px',
+        }}
+        severity="error">{error.message}</Alert>}
+    </div >
   )
 }
 

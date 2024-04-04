@@ -8,7 +8,7 @@ const meta: Meta<typeof TagsList> = {
 }
 export default meta;
 
-export const Template = () => <TagsList tagsData={[{ name: 'JavaScript', count: 100 }, { name: 'React', count: 200 }]}
+export const Template = () => <TagsList tagsData={[{ count: 100, name: 'JavaScript', }, { count: 200, name: 'React', }]}
     sortBy='name'
     setSortBy={() => { }}
     sortOrder='asc'
