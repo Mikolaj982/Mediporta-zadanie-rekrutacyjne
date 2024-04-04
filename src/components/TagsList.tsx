@@ -127,7 +127,7 @@ const TagsList: React.FC<TagsListProps> = ({ sortBy, setSortBy, sortOrder, setSo
                                         if (column.name === 'name' || column.name === 'count') {
                                             const value = row[column.name]
                                             return (
-                                                <TableCell key={column.name}>
+                                                <TableCell key={column.name} sx={{ width: '50%' }}>
                                                     {value}
                                                 </TableCell>
                                             );
