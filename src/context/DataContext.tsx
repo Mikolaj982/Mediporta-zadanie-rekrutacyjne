@@ -5,7 +5,7 @@ export interface TagData {
     count: number,
 }
 
-export interface DataContextType {
+interface DataContextType {
     tagsData: TagData[];
     setTagsData: Dispatch<SetStateAction<TagData[]>>;
     sortBy: string;
