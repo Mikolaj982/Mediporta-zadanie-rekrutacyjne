@@ -1,3 +1,24 @@
+# Interfejs Użytkownika Przeglądarki Tagów
+Ten projekt to interfejs użytkownika przeglądarki tagów, stworzona w React, wykorzystująca API StackOverflow do pobierania danych na temat tagów. Interfejs zapewnia przeglądanie tagów wraz z liczbą powiązanych postów.
+
+# Funkcje:
+- Stronicowana tabela lub lista wyświetlająca tagi wraz z liczbą powiązanych postów.
+- Konfigurowalna liczba elementów na stronie za pomocą pola numerycznego nad tabelą/listą.
+- Element UI do wyboru pola sortowania i kierunku.
+- Obsługa stanów ładowania i błędów podczas pobierania danych.
+- Wykorzystanie gotowej biblioteki komponentów UI, takiej jak MUI.
+- Zarządzanie stanem aplikacji za pomocą ContextAPI.
+- Konfiguracja Storybook do prezentacji komponentów aplikacji.
+- Całość projektu powinna być uruchamialna za pomocą trzech poleceń: "npm ci", "npm start", "npm run storybook".
+
+# Użyte Technologie:
+- React z TypeScriptem
+- API Context do zarządzania stanem
+- MUI (Material-UI) dla komponentów UI
+- Fetch do żądań API
+- Storybook do dokumentacji i prezentacji komponentów
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
